@@ -142,7 +142,12 @@ export interface TUnknown extends AbstractAST {
 
 export interface TCustomType extends AbstractAST {
   type: 'CUSTOM_TYPE'
-  params: string
+  params: {
+    module?: string
+    name: string
+    defaultExport?: boolean
+    typeOnly?: boolean
+  }
 }
 
 ////////////////////////////////////////////     literals

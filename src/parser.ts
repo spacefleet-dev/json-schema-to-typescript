@@ -173,6 +173,18 @@ function parseNonLiteral(
         type: 'BOOLEAN'
       }
     case 'CUSTOM_TYPE':
+      if (typeof schema.tsType === 'string') {
+        return {
+          comment: schema.description,
+          keyName,
+          params: {
+            name: schema.tsType!
+          },
+          standaloneName: standaloneName(schema, keyNameFromDefinition, usedNames),
+          type: 'CUSTOM_TYPE'
+        }
+      }
+
       return {
         comment: schema.description,
         keyName,
@@ -180,6 +192,7 @@ function parseNonLiteral(
         standaloneName: standaloneName(schema, keyNameFromDefinition, usedNames),
         type: 'CUSTOM_TYPE'
       }
+
     case 'NAMED_ENUM':
       return {
         comment: schema.description,
